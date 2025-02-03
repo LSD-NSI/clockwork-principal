@@ -32,7 +32,7 @@ body {
 .texte {
     display: inline-block;
     white-space: nowrap;
-    animation: defilement-dg 40s linear infinite;
+    animation: defilement-dg 60s linear infinite;
 }
 
 @keyframes defilement-dg {
