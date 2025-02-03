@@ -177,7 +177,7 @@ function formatNumberWithAbbreviation(number) {
     } else if (number >= 1e6) {
         return (number / 1e6).toFixed(1) + " millions";
     } else {
-        return number.toString();
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     }
 }
 
@@ -191,7 +191,7 @@ function formatNumberWithAbbreviationv2(number) {
     } else if (number >= 1e6) {
         return (number / 1e6).toFixed(0) + " millions";
     } else {
-        return number.toString();
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     }
 }
 
@@ -464,6 +464,7 @@ function createRandomButton() {
     button.style.height = '100px';
     button.style.position = 'absolute';
     button.style.cursor = 'pointer';
+    button.style.zIndex = "50" ;
 
     const goSound = new Audio('musiques/go.mp3');
     goSound.play();
