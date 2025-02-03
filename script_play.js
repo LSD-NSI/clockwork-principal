@@ -464,31 +464,34 @@ function createRandomButton() {
     button.style.height = '100px';
     button.style.position = 'absolute';
     button.style.cursor = 'pointer';
-    button.style.zIndex = "50" ;
+    button.style.zIndex = "50";
 
     const goSound = new Audio('musiques/go.mp3');
     goSound.play();
 
-    const x = Math.random() * window.innerWidth - 100;
-    const y = Math.random() * window.innerHeight - 100;
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
     button.style.left = `${Math.max(0, x)}px`;
     button.style.top = `${Math.max(0, y)}px`;
 
     buttonVisible = true;
     button.addEventListener('click', () => {
-        const addition = Math.random() < 0.5 ? 0.4 : 0.6;
-        const additionValue = Math.floor(counter * addition);
-        counter += additionValue;
+        if (Math.random() < 0.01) { // 1% de chance de reset
+            counter = 0;
+            showCustomAlert('Compteur réinitialisé !');
+        } else {
+            const addition = Math.random() < 0.5 ? 0.4 : 0.6;
+            const additionValue = Math.floor(counter * addition);
+            counter += additionValue;
+            showCustomAlert(`+${formatNumber(additionValue)} points`);
+        }
+
         updateCounterDisplay();
-
-        showCustomAlert(`+${formatNumber(additionValue)} points`);
-
         localStorage.setItem('clickCount', counter);
 
         document.body.removeChild(button);
         buttonVisible = false;
     });
-
 
     document.body.appendChild(button);
 
@@ -497,11 +500,11 @@ function createRandomButton() {
             document.body.removeChild(button);
             buttonVisible = false;
         }
-    }, 25000); // 25 seconde
+    }, 25000); // 25 secondes
 }
 
 function randomButtonGenerator() {
-    const randomTime = Math.random() * 600000; //10 minutes
+    const randomTime = Math.random() * 6; // 10 minutes
     setTimeout(() => {
         createRandomButton();
         randomButtonGenerator();
@@ -541,6 +544,7 @@ function showCustomAlert(message) {
 }
 
 randomButtonGenerator();
+
 
 function updateUpgradeInfo() {
     if (currentUpgradeIndex < upgrades.length) {
