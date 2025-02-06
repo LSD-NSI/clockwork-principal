@@ -108,6 +108,26 @@ window.addEventListener('resize', () => {
     particlesArray.length = 0;
 });
 
+function showPopup() {
+            const popup = document.getElementById("popup");
+            popup.style.display = "block";
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 2000);
+        }
+
+        document.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+            showPopup();
+        });
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+                showPopup();
+            }
+        });
+		
 
 let counter = parseInt(localStorage.getItem('clickCount')) || 0;
 let clickValue = parseInt(localStorage.getItem('clickValue')) || 1;
@@ -243,7 +263,7 @@ function updateButtonStates() {
 function updateCounterDisplay() {
     counterDisplay.textContent = formatNumber(counter.toFixed(0));
     updateUpgradeInfo();
-    updateButtonStates(); // Ajouter cet appel ici
+    updateButtonStates();
 }
 
 
@@ -526,8 +546,7 @@ function showCustomAlert(message) {
     alertBox.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
     alertBox.style.transition = 'opacity 4s ease-in-out, transform 4s ease-in-out';
     alertBox.style.transform = 'translateX(-50%) translateY(40px)';
-    alertBox.style.zIndex = '5';
-
+	alertBox.style.zIndex = '5';
 
     document.body.appendChild(alertBox);
 
