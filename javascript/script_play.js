@@ -459,7 +459,7 @@ function createRandomButton() {
     }
 
     const button = document.createElement('img');
-    button.src = 'images/button.png';
+    button.src = '../images/button.png';
     button.style.width = '100px';
     button.style.height = '100px';
     button.style.position = 'absolute';
