@@ -526,6 +526,8 @@ function showCustomAlert(message) {
     alertBox.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
     alertBox.style.transition = 'opacity 4s ease-in-out, transform 4s ease-in-out';
     alertBox.style.transform = 'translateX(-50%) translateY(40px)';
+    alertBox.style.zIndex = '5';
+
 
     document.body.appendChild(alertBox);
 
