@@ -466,7 +466,7 @@ function createRandomButton() {
     button.style.cursor = 'pointer';
     button.style.zIndex = "50";
 
-    const goSound = new Audio('musiques/go.mp3');
+    const goSound = new Audio('../musiques/go.mp3');
     goSound.play();
 
     const x = Math.random() * (window.innerWidth - 100);
