@@ -121,7 +121,7 @@ document.addEventListener("contextmenu", function (event) {
 });
 
 document.addEventListener("keydown", function (event) {
-    if (event.key === "F12",|| (event.ctrlKey && event.shiftKey && event.key === "I")) {
+    if (event.key === "F12"|| (event.ctrlKey && event.shiftKey && event.key === "I")) {
         event.preventDefault();
         showPopup();
     }
@@ -148,8 +148,6 @@ setInterval(() => {
 document.addEventListener('click', () => {
     verifierClicsParSeconde();
 });
-
-
 
 let counter = parseInt(localStorage.getItem('clickCount')) || 0;
 let clickValue = parseInt(localStorage.getItem('clickValue')) || 1;
@@ -663,3 +661,115 @@ updateBuildingPrices();
 updateButtonStates();
 updateUpgradeInfo();
 setInterval(applyCPS, 100);
+
+
+// Ajout d'un bouton pour sauvegarder les données
+const saveButton = document.createElement("button");
+saveButton.textContent = "📁";
+saveButton.style.position = "absolute";
+saveButton.style.top = "55px";
+saveButton.style.left = "250px";
+saveButton.style.width = "37px";
+saveButton.style.height = "39px";
+saveButton.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+saveButton.style.color = "white";
+saveButton.style.border = "1px solid white";
+saveButton.style.padding = "10px 15px";
+saveButton.style.borderRadius = "4px";
+saveButton.style.transition = "background-color 0.3s ease";
+saveButton.style.display = "flex";
+saveButton.style.justifyContent = "center";
+saveButton.style.alignItems = "center";
+document.body.appendChild(saveButton);
+
+saveButton.addEventListener("click", () => {
+    const data = {
+        counter,
+        clickValue,
+        trophies,
+        buildings,
+        buildingPrices,
+        currentUpgradeIndex
+    };
+    const blob = new Blob([JSON.stringify(data)], { type: "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "sauvegarde.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+});
+
+const loadButton = document.createElement("button");
+loadButton.textContent = "📂";
+loadButton.style.position = "absolute";
+loadButton.style.top = "55px";
+loadButton.style.left = "210px"; // Aligné avec le saveButton
+loadButton.style.width = "37px";
+loadButton.style.height = "39px"; // Même hauteur que le saveButton
+loadButton.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+loadButton.style.color = "white";
+loadButton.style.border = "1px solid white";
+loadButton.style.padding = "10px 15px"; // Identique à saveButton
+loadButton.style.borderRadius = "4px";
+loadButton.style.transition = "background-color 0.3s ease";
+loadButton.style.display = "flex";
+loadButton.style.justifyContent = "center";
+loadButton.style.alignItems = "center";
+document.body.appendChild(loadButton);
+
+
+// Crée un input de type "file" pour sélectionner un fichier sans affichage
+const loadInput = document.createElement("input");
+loadInput.type = "file";
+loadInput.style.display = "none";  // On cache l'input de type "file"
+
+// Ajouter l'input au corps du document
+document.body.appendChild(loadInput);
+
+// Lier le bouton à l'input pour ouvrir la boîte de sélection de fichier
+loadButton.addEventListener("click", () => {
+    loadInput.click();
+});
+
+// Lorsqu'un fichier est sélectionné, traiter le fichier
+loadInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const loadedData = JSON.parse(e.target.result);
+                counter = loadedData.counter || 0;
+                clickValue = loadedData.clickValue || 1;
+                trophies = loadedData.trophies || [];
+                buildings = loadedData.buildings || {};
+                buildingPrices = loadedData.buildingPrices || {};
+                currentUpgradeIndex = loadedData.currentUpgradeIndex || 0;
+                
+                localStorage.setItem("clickCount", counter);
+                localStorage.setItem("clickValue", clickValue);
+                localStorage.setItem("trophies", JSON.stringify(trophies));
+                localStorage.setItem("buildings", JSON.stringify(buildings));
+                localStorage.setItem("buildingPrices", JSON.stringify(buildingPrices));
+                localStorage.setItem("currentUpgradeIndex", currentUpgradeIndex);
+                
+                updateCounterDisplay();
+                updateCPSDisplay();
+                updateBuildingPrices();
+                updateUpgradeInfo();
+                
+                location.reload();
+
+            } catch (error) {
+                alert("Erreur lors du chargement du fichier");
+            }
+        };
+        reader.readAsText(file);
+    }
+});
+
+// Fonction pour changer le texte du bouton
+function changeButtonText(newText) {
+    loadButton.textContent = newText;
+}
