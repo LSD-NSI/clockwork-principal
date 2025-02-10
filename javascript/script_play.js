@@ -129,8 +129,8 @@ document.addEventListener("keydown", function (event) {
 
 
 let clicsRecents = 0;
-const limiteClicsParSeconde = 20;
-const intervalleDeTemps = 1000;
+const limiteClicsParSeconde = 12;
+const intervalleDeTemps = 1200;
 
 function verifierClicsParSeconde() {
     clicsRecents++;
