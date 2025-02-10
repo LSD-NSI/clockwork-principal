@@ -110,7 +110,7 @@ main {
     border-radius: 10px;
     width: 400px;
     box-sizing: border-box;
-    height: 97vh;
+    height: 860px;
     padding-left: 16px;
     padding-right: 16px;
     margin-top: 2px;
@@ -120,7 +120,7 @@ main {
     position: absolute;
     top: 55px;
     left: 24px;
-    padding: 8px 16px;
+    padding: 8px 15px;
     font-size: 14.4px;
     text-decoration: none;
     color: white;
@@ -212,14 +212,20 @@ main {
 
 
 #reset {
-    padding: 4px 8px;
-    font-size: 11.2px;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: black;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
     position: absolute;
-    bottom: 20px;
+    top: 55px;
+    left: 290px;
+    width: auto;
+    height: 39px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 4px;
+    border: 1px solid white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14.4px;
 }
 
 #reset:hover {
@@ -265,6 +271,7 @@ footer {
     margin-left: auto;
     margin-top: 2px;
     padding: 8px;
+	height: 860px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 8px;
     width: 480px;
