@@ -121,7 +121,7 @@ document.addEventListener("contextmenu", function (event) {
 });
 
 document.addEventListener("keydown", function (event) {
-    if (event.key === "F12"|| (event.ctrlKey && event.shiftKey && event.key === "I")) {
+    if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
         event.preventDefault();
         showPopup();
     }
@@ -663,24 +663,65 @@ updateUpgradeInfo();
 setInterval(applyCPS, 100);
 
 
-// Ajout d'un bouton pour sauvegarder les données
+const menuButton = document.createElement("button");
+menuButton.textContent = "📁";
+menuButton.style.position = "absolute";
+menuButton.style.top = "55px";
+menuButton.style.left = "212px";
+menuButton.style.width = "37px";
+menuButton.style.height = "38px";
+menuButton.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+menuButton.style.color = "white";
+menuButton.style.border = "1px solid white";
+menuButton.style.borderRadius = "4px";
+menuButton.style.transition = "background-color 0.3s ease";
+menuButton.style.display = "flex";
+menuButton.style.justifyContent = "center";
+menuButton.style.alignItems = "center";
+document.body.appendChild(menuButton);
+
+const menuContainer = document.createElement("div");
+menuContainer.style.position = "absolute";
+menuContainer.style.top = "110%";
+menuContainer.style.left = "0";
+menuContainer.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
+menuContainer.style.border = "1px solid white";
+menuContainer.style.borderRadius = "4px";
+menuContainer.style.display = "none";
+menuContainer.style.flexDirection = "column";
+menuContainer.style.gap = "5px";
+menuContainer.style.padding = "8px";
+menuContainer.style.zIndex = "100";
+menuContainer.style.width = "80px";
+menuContainer.style.textAlign = "center";
+
 const saveButton = document.createElement("button");
-saveButton.textContent = "📁";
-saveButton.style.position = "absolute";
-saveButton.style.top = "55px";
-saveButton.style.left = "250px";
-saveButton.style.width = "37px";
-saveButton.style.height = "39px";
-saveButton.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+saveButton.textContent = "💾 Save";
+saveButton.style.width = "100%";
+saveButton.style.backgroundColor = "black";
 saveButton.style.color = "white";
 saveButton.style.border = "1px solid white";
-saveButton.style.padding = "10px 15px";
+saveButton.style.padding = "5px";
 saveButton.style.borderRadius = "4px";
-saveButton.style.transition = "background-color 0.3s ease";
-saveButton.style.display = "flex";
-saveButton.style.justifyContent = "center";
-saveButton.style.alignItems = "center";
-document.body.appendChild(saveButton);
+saveButton.style.cursor = "pointer";
+menuContainer.appendChild(saveButton);
+
+const loadButton = document.createElement("button");
+loadButton.textContent = "📂 Load";
+loadButton.style.width = "100%";
+loadButton.style.backgroundColor = "black";
+loadButton.style.color = "white";
+loadButton.style.border = "1px solid white";
+loadButton.style.padding = "5px";
+loadButton.style.borderRadius = "4px";
+loadButton.style.cursor = "pointer";
+menuContainer.appendChild(loadButton);
+
+menuButton.appendChild(menuContainer);
+
+menuButton.addEventListener("click", () => {
+    menuContainer.style.display = menuContainer.style.display === "flex" ? "none" : "flex";
+});
 
 saveButton.addEventListener("click", () => {
     const data = {
@@ -700,39 +741,15 @@ saveButton.addEventListener("click", () => {
     document.body.removeChild(a);
 });
 
-const loadButton = document.createElement("button");
-loadButton.textContent = "📂";
-loadButton.style.position = "absolute";
-loadButton.style.top = "55px";
-loadButton.style.left = "210px"; // Aligné avec le saveButton
-loadButton.style.width = "37px";
-loadButton.style.height = "39px"; // Même hauteur que le saveButton
-loadButton.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-loadButton.style.color = "white";
-loadButton.style.border = "1px solid white";
-loadButton.style.padding = "10px 15px"; // Identique à saveButton
-loadButton.style.borderRadius = "4px";
-loadButton.style.transition = "background-color 0.3s ease";
-loadButton.style.display = "flex";
-loadButton.style.justifyContent = "center";
-loadButton.style.alignItems = "center";
-document.body.appendChild(loadButton);
-
-
-// Crée un input de type "file" pour sélectionner un fichier sans affichage
 const loadInput = document.createElement("input");
 loadInput.type = "file";
-loadInput.style.display = "none";  // On cache l'input de type "file"
-
-// Ajouter l'input au corps du document
+loadInput.style.display = "none";
 document.body.appendChild(loadInput);
 
-// Lier le bouton à l'input pour ouvrir la boîte de sélection de fichier
 loadButton.addEventListener("click", () => {
     loadInput.click();
 });
 
-// Lorsqu'un fichier est sélectionné, traiter le fichier
 loadInput.addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -746,19 +763,19 @@ loadInput.addEventListener("change", (event) => {
                 buildings = loadedData.buildings || {};
                 buildingPrices = loadedData.buildingPrices || {};
                 currentUpgradeIndex = loadedData.currentUpgradeIndex || 0;
-                
+
                 localStorage.setItem("clickCount", counter);
                 localStorage.setItem("clickValue", clickValue);
                 localStorage.setItem("trophies", JSON.stringify(trophies));
                 localStorage.setItem("buildings", JSON.stringify(buildings));
                 localStorage.setItem("buildingPrices", JSON.stringify(buildingPrices));
                 localStorage.setItem("currentUpgradeIndex", currentUpgradeIndex);
-                
+
                 updateCounterDisplay();
                 updateCPSDisplay();
                 updateBuildingPrices();
                 updateUpgradeInfo();
-                
+
                 location.reload();
 
             } catch (error) {
@@ -768,8 +785,3 @@ loadInput.addEventListener("change", (event) => {
         reader.readAsText(file);
     }
 });
-
-// Fonction pour changer le texte du bouton
-function changeButtonText(newText) {
-    loadButton.textContent = newText;
-}
