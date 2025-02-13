@@ -145,7 +145,7 @@ document.addEventListener("contextmenu", function (event) {
 });
 
 document.addEventListener("keydown", function (event) {
-    if (event.key === "F12" || (event.key === "F3" || (event.ctrlKey && event.shiftKey && event.key === "I"))) {
+    if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
         event.preventDefault();
         showPopup();
     }
