@@ -110,8 +110,26 @@ window.addEventListener('resize', () => {
 function showPopup() {
     const popup = document.getElementById("popup");
     const overlay = document.getElementById("overlay");
+    const closeButton = document.getElementById("closeButton");
+    const countdown = document.getElementById("countdown");
+    
     popup.style.display = "block";
     overlay.style.display = "block";
+    
+    closeButton.disabled = true;
+    let timeLeft = 10;
+    countdown.textContent = `Veuillez patienter ${timeLeft} secondes`;
+    
+    const timer = setInterval(() => {
+        timeLeft--;
+        countdown.textContent = `Veuillez patienter ${timeLeft} secondes`;
+        
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            closeButton.disabled = false;
+            countdown.textContent = "Vous pouvez maintenant fermer la fenêtre.";
+        }
+    }, 1000);
 }
 
 function closePopup() {
@@ -134,7 +152,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 let clicsRecents = 0;
-const limiteClicsParSeconde = 15;
+const limiteClicsParSeconde = 12;
 const intervalleDeTemps = 1200;
 
 function verifierClicsParSeconde() {
@@ -550,7 +568,7 @@ function createRandomButton() {
 }
 
 function randomButtonGenerator() {
-    const randomTime = Math.random() * 900000; // 10 minutes
+    const randomTime = Math.random() * 600000; // 10 minutes
     setTimeout(() => {
         createRandomButton();
         randomButtonGenerator();
