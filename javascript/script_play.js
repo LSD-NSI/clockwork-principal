@@ -663,6 +663,10 @@ updateUpgradeInfo();
 setInterval(applyCPS, 100);
 
 
+
+
+const SECRET_KEY = "FSg$Q$T%x7xKhU@EJjb3"; 
+
 const menuButton = document.createElement("button");
 menuButton.textContent = "📁";
 menuButton.style.position = "absolute";
@@ -732,7 +736,11 @@ saveButton.addEventListener("click", () => {
         buildingPrices,
         currentUpgradeIndex
     };
-    const blob = new Blob([JSON.stringify(data)], { type: "text/plain" });
+    
+    // 🔒 Chiffrement des données avec AES
+    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
+
+    const blob = new Blob([encryptedData], { type: "text/plain" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "sauvegarde.txt";
@@ -756,7 +764,14 @@ loadInput.addEventListener("change", (event) => {
         const reader = new FileReader();
         reader.onload = (e) => {
             try {
-                const loadedData = JSON.parse(e.target.result);
+                // 🔓 Déchiffrement AES
+                const decryptedBytes = CryptoJS.AES.decrypt(e.target.result, SECRET_KEY);
+                const decryptedData = decryptedBytes.toString(CryptoJS.enc.Utf8);
+                
+                if (!decryptedData) throw new Error("Déchiffrement échoué");
+
+                const loadedData = JSON.parse(decryptedData);
+
                 counter = loadedData.counter || 0;
                 clickValue = loadedData.clickValue || 1;
                 trophies = loadedData.trophies || [];
@@ -779,7 +794,7 @@ loadInput.addEventListener("change", (event) => {
                 location.reload();
 
             } catch (error) {
-                alert("Erreur lors du chargement du fichier");
+                alert("Erreur lors du chargement ou du déchiffrement du fichier");
             }
         };
         reader.readAsText(file);
