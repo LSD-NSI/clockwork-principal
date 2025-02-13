@@ -550,7 +550,7 @@ function createRandomButton() {
 }
 
 function randomButtonGenerator() {
-    const randomTime = Math.random() * 600000; // 10 minutes
+    const randomTime = Math.random() * 900000; // 10 minutes
     setTimeout(() => {
         createRandomButton();
         randomButtonGenerator();
