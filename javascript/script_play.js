@@ -136,8 +136,7 @@ function verifierClicsParSeconde() {
     clicsRecents++;
 
     if (clicsRecents > limiteClicsParSeconde) {
-        alert("Autoclicker détecté : Vous avez cliqué trop vite !");
-        location.reload();
+        showPopup();
         clicsRecents = 0;
     }
 }
@@ -665,7 +664,7 @@ setInterval(applyCPS, 100);
 
 
 
-const SECRET_KEY = "FSg$Q$T%x7xKhU@EJjb3"; 
+const SECRET_KEY = "FSg$Q$T%x7xKhU@EJjb3!"; 
 
 const menuButton = document.createElement("button");
 menuButton.textContent = "📁";
