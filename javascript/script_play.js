@@ -109,10 +109,16 @@ window.addEventListener('resize', () => {
 
 function showPopup() {
     const popup = document.getElementById("popup");
+    const overlay = document.getElementById("overlay");
     popup.style.display = "block";
-    setTimeout(() => {
-        popup.style.display = "none";
-    }, 2000);
+    overlay.style.display = "block";
+}
+
+function closePopup() {
+    const popup = document.getElementById("popup");
+    const overlay = document.getElementById("overlay");
+    popup.style.display = "none";
+    overlay.style.display = "none";
 }
 
 document.addEventListener("contextmenu", function (event) {
@@ -127,7 +133,6 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-
 let clicsRecents = 0;
 const limiteClicsParSeconde = 12;
 const intervalleDeTemps = 1200;
@@ -140,6 +145,7 @@ function verifierClicsParSeconde() {
         clicsRecents = 0;
     }
 }
+
 setInterval(() => {
     clicsRecents = 0;
 }, intervalleDeTemps);
@@ -147,6 +153,7 @@ setInterval(() => {
 document.addEventListener('click', () => {
     verifierClicsParSeconde();
 });
+
 
 let counter = parseInt(localStorage.getItem('clickCount')) || 0;
 let clickValue = parseInt(localStorage.getItem('clickValue')) || 1;
