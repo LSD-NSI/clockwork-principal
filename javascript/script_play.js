@@ -134,7 +134,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 let clicsRecents = 0;
-const limiteClicsParSeconde = 12;
+const limiteClicsParSeconde = 15;
 const intervalleDeTemps = 1200;
 
 function verifierClicsParSeconde() {
