@@ -10,6 +10,7 @@ body {
     color: white;
 }
 
+
 .bandeau {
     top: 0;
     left: 0;
@@ -214,23 +215,41 @@ main {
 #reset {
     position: absolute;
     top: 55px;
-    left: 252px;
+    left: 292px;
     width: auto;
-    height: 39px;
+    height: 38px;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    border-radius: 4px;
+    border-radius: 3px;
     border: 1px solid white;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14.4px;
+    font-size: 14px;
 }
 
 #reset:hover {
     background-color: rgba(200, 200, 200, 0.9);
 }
+
+.conseil {
+    position: absolute;
+    top: 55px;
+    left: 252px;
+    width: 35px;
+    height: 36px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
 
 button:disabled {
     background-color: lightgray;
