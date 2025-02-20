@@ -10,7 +10,6 @@ body {
     color: white;
 }
 
-
 .bandeau {
     top: 0;
     left: 0;
@@ -62,21 +61,197 @@ body {
     }
 }
 
-
-@media (max-width: 768px) {
-
-    .game,
-    .shop,
-    .click-shop,
-    .trophies {
-        width: 90%;
-        margin: 8px auto;
+/* Responsivité pour les grands écrans */
+@media (min-width: 1025px) {
+    .game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        background-color: #000000b3;
+        border-radius: 10px;
+        width: 400px;
+        box-sizing: border-box;
+        height: 860px;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-top: 2px;
     }
 
-    .click-shop,
+    .game canvas {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+
+    .menu-button {
+        font-size: 14.4px;
+        padding: 8px 15px;
+        top: 55px;
+        left: 24px;
+    }
+
+    .volume-control {
+        top: 100px;
+        left: 110px;
+        padding: 5px;
+    }
+
+    #volume-button {
+        top: 55px;
+        left: 170px;
+        width: 38px;
+        height: 38px;
+        font-size: 14.4px;
+    }
+
+    #reset {
+        top: 55px;
+        left: 292px;
+        font-size: 14px;
+    }
+
+    #compteur {
+        width: 220px;
+        height: 220px;
+    }
+
+    .tabs {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+
+    .click-shop, .trophies {
+        width: 400px;
+    }
+
     .trophies {
+        max-height: 500px;
+        padding: 8px;
+    }
+
+    footer {
+        font-size: 11.2px;
+        padding: 8px;
+    }
+}
+
+/* Responsivité pour les écrans moyens (tablettes et petits écrans de bureau) */
+@media (max-width: 1024px) {
+    .game {
+        width: 90%;
+        height: auto;
+        margin: 8px auto;
+        padding: 8px;
+    }
+
+    .click-shop, .trophies {
         top: auto;
         transform: none;
+    }
+
+    .menu-button {
+        font-size: 12px;
+        padding: 6px 12px;
+        top: 10px;
+        left: 10px;
+    }
+
+    .volume-control {
+        top: 70px;
+        left: 80px;
+        padding: 8px;
+    }
+
+    #volume-button {
+        top: 10px;
+        left: 90px;
+        font-size: 12px;
+    }
+
+    #reset {
+        top: 10px;
+        left: 220px;
+        font-size: 12px;
+    }
+
+    #compteur {
+        width: 180px;
+        height: 180px;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .click-shop, .trophies {
+        width: 90%;
+        left: 5%;
+        transform: none;
+    }
+
+    .click-shop button {
+        width: 100%;
+    }
+
+    .trophies {
+        max-height: 400px;
+        padding: 12px;
+    }
+
+    footer {
+        font-size: 10px;
+        padding: 4px;
+    }
+}
+
+/* Responsivité pour les petits écrans (smartphones) */
+@media (max-width: 768px) {
+    .game {
+        width: 100%;
+        height: auto;
+        margin: 8px 0;
+        padding: 8px;
+    }
+
+    .menu-button, #volume-button, #reset, .conseil {
+        top: 10px;
+        left: 10px;
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+
+    #compteur {
+        width: 150px;
+        height: 150px;
+    }
+
+    .tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .click-shop, .trophies {
+        width: 100%;
+        left: 0;
+    }
+
+    .trophies {
+        max-height: 300px;
+        padding: 8px;
+    }
+
+    footer {
+        font-size: 9px;
+        padding: 2px;
+    }
+
+    #popup {
+        font-size: 14px;
+        padding: 10px;
     }
 }
 
@@ -101,22 +276,6 @@ main {
     padding: 0 16px;
 }
 
-.game {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    background-color: #000000b3;
-    border-radius: 10px;
-    width: 400px;
-    box-sizing: border-box;
-    height: 860px;
-    padding-left: 16px;
-    padding-right: 16px;
-    margin-top: 2px;
-}
-
 .menu-button {
     position: absolute;
     top: 55px;
@@ -134,7 +293,6 @@ main {
 .menu-button:hover {
     background-color: rgba(50, 50, 50, 0.9);
 }
-
 
 .volume-control {
     position: absolute;
@@ -183,7 +341,6 @@ main {
     justify-content: center;
     align-items: center;
     font-size: 14.4px;
-
 }
 
 #volume-button:hover {
@@ -210,7 +367,6 @@ main {
     transform: scale(1.1);
     filter: brightness(1.4);
 }
-
 
 #reset {
     position: absolute;
@@ -249,7 +405,6 @@ main {
     align-items: center;
     text-decoration: none;
 }
-
 
 button:disabled {
     background-color: lightgray;
@@ -375,7 +530,6 @@ footer {
     max-height: 500px;
     overflow: auto;
     scrollbar-color: #b4c8ff #dce5ff;
-
 }
 
 .trophy {
